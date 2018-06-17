@@ -64,8 +64,8 @@ static void MX_USART2_UART_Init(void);
 /* USER CODE END PFP */
 
 /* USER CODE BEGIN 0 */
-//uint8_t in = 0xFF;
-//uint8_t out = 0xFF;
+uint8_t in = 0xFF;
+uint8_t out = 0xFF;
 /* USER CODE END 0 */
 
 int main(void)
@@ -96,17 +96,17 @@ int main(void)
   MX_USART2_UART_Init();
 
   /* USER CODE BEGIN 2 */
-  uint8_t str[] = "Hello UART\r\n";
+  //uint8_t str[] = "Hello UART\r\n";
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  //HAL_UART_Receive_IT(&huart1, &out, 1);
-  //HAL_UART_Receive_IT(&huart2, &in, 1);
+  HAL_UART_Receive_IT(&huart1, &out, 1);
+  HAL_UART_Receive_IT(&huart2, &in, 1);
   while (1)
   {
-	  HAL_UART_Transmit(&huart1, str, sizeof(str) + 1, HAL_MAX_DELAY);
-	  HAL_Delay(1000);
+	//  HAL_UART_Transmit(&huart1, str, sizeof(str) + 1, HAL_MAX_DELAY);
+	  //HAL_Delay(1000);
   }
   /* USER CODE END WHILE */
 
@@ -218,7 +218,7 @@ static void MX_GPIO_Init(void)
 }
 
 
-/* USER CODE BEGIN 4
+/* USER CODE BEGIN 4*/
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 	if (huart == &huart1)
 		{
@@ -230,7 +230,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 			HAL_UART_Transmit_IT(&huart1, &in, 1);
 			HAL_UART_Receive_IT(&huart2, &in, 1);
 		}
-}*/
+}
 //void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart) {
 
 //}
